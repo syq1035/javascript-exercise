@@ -4,10 +4,10 @@ function fetchData(url) {
     // <-- start
     // TODO 22: 通过Promise实现异步请求
     xhr.onreadystatechange = function onchange() {
-      if (xhr.readyState === 4 && (xhr.status >= 200 || xhr.status < 300)) {
+      if (xhr.readyState === 4 && xhr.status === 200) {
         resolve(xhr.responseText);
-      } else if (xhr.readyState === 4 && (xhr.status < 200 || xhr.status >= 300)) {
-        reject(xhr.error);
+      } else if (xhr.readyState === 4 && (xhr.status < 200 || xhr.status >= 400)) {
+        reject(new Error('error msg'));
       }
     };
     xhr.open('get', url, true);
